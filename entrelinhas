@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrelaço</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rosa: #f8bbd0;
+      --lilas: #ce93d8;
+      --cinza: #f5f5f5;
+      --preto: #212121;
+      --branco: #ffffff;
+    }* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cinza);
+  color: var(--preto);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--branco);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header img {
+  max-width: 200px;
+  height: auto;
+}
+
+nav {
+  background-color: var(--preto);
+  padding: 1rem;
+  text-align: center;
+}
+
+nav a {
+  color: var(--branco);
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 600;
+}
+
+.banner {
+  background: url('https://images.unsplash.com/photo-1578898888490-8c03fd644398') center/cover no-repeat;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.produto {
+  background: var(--branco);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.produto:hover {
+  transform: scale(1.03);
+}
+
+.produto img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.produto h3 {
+  margin: 1rem 0 0.5rem;
+}
+
+.produto p {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.produto button {
+  background: var(--preto);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.produto button:hover {
+  background: var(--lilas);
+}
+
+#carrinho {
+  background: var(--branco);
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#cadastro {
+  background: var(--branco);
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input, button {
+  padding: 0.8rem;
+  font-size: 1rem;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  background: var(--preto);
+  color: var(--branco);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: var(--lilas);
+}
+
+footer {
+  background-color: var(--preto);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://chat.openai.com/share-image/8f6a3b34-63a6-40f0-aabd-05393e9c64a5" alt="Logo Entrelaço" />
+  </header>  <nav>
+    <a href="#produtos">Produtos</a>
+    <a href="#carrinho">Carrinho</a>
+    <a href="#cadastro">Cadastro</a>
+  </nav>  <div class="banner">
+    Artesanato com alma
+  </div>  <section id="produtos" class="produtos">
+    <div class="produto">
+      <img src="https://via.placeholder.com/300x200" alt="Bolsa Praia">
+      <h3>Bolsa de Praia</h3>
+      <p>R$ 89,90</p>
+      <button onclick="adicionarAoCarrinho('Bolsa de Praia', 89.90)">Adicionar ao Carrinho</button>
+    </div>
+    <div class="produto">
+      <img src="https://via.placeholder.com/300x200" alt="Saída de Praia">
+      <h3>Saída de Praia</h3>
+      <p>R$ 69,90</p>
+      <button onclick="adicionarAoCarrinho('Saída de Praia', 69.90)">Adicionar ao Carrinho</button>
+    </div>
+    <div class="produto">
+      <img src="https://via.placeholder.com/300x200" alt="Biquíni">
+      <h3>Biquíni</h3>
+      <p>R$ 99,90</p>
+      <button onclick="adicionarAoCarrinho('Biquíni', 99.90)">Adicionar ao Carrinho</button>
+    </div>
+  </section>  <section id="carrinho">
+    <h2>Carrinho de Compras</h2>
+    <ul id="lista-carrinho"></ul>
+    <p><strong>Total:</strong> R$ <span id="total">0.00</span></p>
+  </section>  <section id="cadastro">
+    <h2>Cadastro</h2>
+    <form onsubmit="event.preventDefault(); alert('Cadastro enviado com sucesso!');">
+      <input type="text" placeholder="Nome completo" required />
+      <input type="email" placeholder="E-mail" required />
+      <input type="tel" placeholder="Telefone" />
+      <button type="submit">Cadastrar</button>
+    </form>
+  </section>  <footer>
+    &copy; 2025 Entrelaço. Todos os direitos reservados.
+  </footer>  <script>
+    const listaCarrinho = document.getElementById("lista-carrinho");
+    const totalSpan = document.getElementById("total");
+    let total = 0;
+
+    function adicionarAoCarrinho(nome, preco) {
+      const li = document.createElement("li");
+      li.textContent = ${nome} - R$ ${preco.toFixed(2)};
+      listaCarrinho.appendChild(li);
+      total += preco;
+      totalSpan.textContent = total.toFixed(2);
+    }
+  </script></body>
+</html>
